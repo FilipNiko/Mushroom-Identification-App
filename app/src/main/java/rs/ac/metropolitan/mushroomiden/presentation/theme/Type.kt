@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.ui.theme
+package rs.ac.metropolitan.mushroomiden.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.ui.theme
+package rs.ac.metropolitan.mushroomiden.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -37,6 +37,7 @@ private val LightColors = lightColorScheme(
     surfaceTint = md_theme_light_surfaceTint,
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim,
+
 )
 
 

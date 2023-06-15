@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.ui.theme
+package rs.ac.metropolitan.mushroomiden.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -18,7 +18,7 @@ val md_theme_light_error = Color(0xFFBA1A1A)
 val md_theme_light_errorContainer = Color(0xFFFFDAD6)
 val md_theme_light_onError = Color(0xFFFFFFFF)
 val md_theme_light_onErrorContainer = Color(0xFF410002)
-val md_theme_light_background = Color(0xFFFFFBFF)
+val md_theme_light_background = Color(0xFFFFFFFF)
 val md_theme_light_onBackground = Color(0xFF1C1D00)
 val md_theme_light_surface = Color(0xFFFFFBFF)
 val md_theme_light_onSurface = Color(0xFF1C1D00)
@@ -49,9 +49,9 @@ val md_theme_dark_error = Color(0xFFFFB4AB)
 val md_theme_dark_errorContainer = Color(0xFF93000A)
 val md_theme_dark_onError = Color(0xFF690005)
 val md_theme_dark_onErrorContainer = Color(0xFFFFDAD6)
-val md_theme_dark_background = Color(0xFF1C1D00)
+val md_theme_dark_background = Color(0xFF161616)
 val md_theme_dark_onBackground = Color(0xFFE6E971)
-val md_theme_dark_surface = Color(0xFF1C1D00)
+val md_theme_dark_surface = Color(0xFF161616)
 val md_theme_dark_onSurface = Color(0xFFE6E971)
 val md_theme_dark_surfaceVariant = Color(0xFF534342)
 val md_theme_dark_onSurfaceVariant = Color(0xFFD8C2BF)
@@ -63,6 +63,14 @@ val md_theme_dark_shadow = Color(0xFF000000)
 val md_theme_dark_surfaceTint = Color(0xFFFFB3AC)
 val md_theme_dark_outlineVariant = Color(0xFF534342)
 val md_theme_dark_scrim = Color(0xFF000000)
+
+
+val c1 = Color(0xddd82128)
+val c2 = Color(0xddde4949)
+val c3 = Color(0xeee4716a)
+val c4 = Color(0xeeeb988a)
+val c5 = Color(0xfff1c0ab)
+val c6 = Color(0xfff7e8cc)
 
 
 val seed = Color(0xFFD42328)
