@@ -1,65 +1,40 @@
-package rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.idrentification_result
+package rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.idrentification_result.components
 
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
-import androidx.compose.ui.Alignment.Companion.End
 import androidx.compose.ui.Alignment.Companion.Top
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
+import androidx.core.content.ContentProviderCompat.requireContext
 import rs.ac.metropolitan.mushroomiden.R
 import rs.ac.metropolitan.mushroomiden.data.remote.dto.Suggestion
-import rs.ac.metropolitan.mushroomiden.presentation.theme.c1
-import rs.ac.metropolitan.mushroomiden.presentation.theme.c2
-import rs.ac.metropolitan.mushroomiden.presentation.theme.c3
-import rs.ac.metropolitan.mushroomiden.presentation.theme.c4
-import rs.ac.metropolitan.mushroomiden.presentation.theme.c5
-import rs.ac.metropolitan.mushroomiden.presentation.theme.c6
 
 @Composable
-fun MushroomPredcitionItem(suggestion: Suggestion, onSelected: (Suggestion) -> Unit) {
+fun MushroomPredcitionItem(suggestion: Suggestion, context:Context, onSelected: (Suggestion) -> Unit) {
 
     val percentage = suggestion.probability * 100
     val formattedPercentage = String.format("%.2f%%", percentage)
@@ -85,14 +60,11 @@ fun MushroomPredcitionItem(suggestion: Suggestion, onSelected: (Suggestion) -> U
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-
                 .background(
                     brush = Brush.linearGradient(
                         colors = listOf(
                             MaterialTheme.colorScheme.surfaceTint,
                             MaterialTheme.colorScheme.primaryContainer
-
-                            //c1, c2, c3, c4, c5, c6
                         )
                     )
                 )
@@ -138,9 +110,14 @@ fun MushroomPredcitionItem(suggestion: Suggestion, onSelected: (Suggestion) -> U
         }
 
         if (openDialog) {
-            MushroomPicture(image = suggestion.similar_images[0].url, name = suggestion.name) {
-                openDialog = false
+            if(suggestion.details?.images!=null){
+                MushroomPicture(images = suggestion.details!!.images, name = suggestion.name) {
+                    openDialog = false
+                }
+            }else{
+                Toast.makeText(context,"No images available!", Toast.LENGTH_LONG)
             }
+
         }
 
     }

@@ -26,6 +26,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -58,6 +59,14 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import rs.ac.metropolitan.mushroomiden.R
 import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.IdentificationSharedViewModel
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.CharacteristicCard
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.CommonNamesCard
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.DescriptionCard
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.ExpandableText
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.ImagesWithOverlay
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.LookAlikeCard
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.LookAlikeItem
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.TaxonomyCard
 import rs.ac.metropolitan.mushroomiden.presentation.navigation.Screen
 
 @Composable
@@ -91,50 +100,8 @@ fun SuggestionDetailsScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(22.dp))
 
-          /*  Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "Phylum: ${suggestion.details?.taxonomy?.phylum}",
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    style = MaterialTheme.typography.bodySmall,
-                    fontSize = 15.sp,
-                    fontStyle = FontStyle.Italic,
-                )
-                Text(
-                    text = "Family: ${suggestion.details?.taxonomy?.family}",
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    style = MaterialTheme.typography.bodySmall,
-                    fontSize = 15.sp,
-                    fontStyle = FontStyle.Italic,
-                    textAlign = TextAlign.End,
-                )
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "Order: ${suggestion.details?.taxonomy?.order}",
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    style = MaterialTheme.typography.bodySmall,
-                    fontSize = 15.sp,
-                    fontStyle = FontStyle.Italic,
-                )
-                Text(
-                    text = "Genus: ${suggestion.details?.taxonomy?.genus}",
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    style = MaterialTheme.typography.bodySmall,
-                    fontSize = 15.sp,
-                    fontStyle = FontStyle.Italic,
-                    textAlign = TextAlign.End,
-                )
-            }*/
-
-            Spacer(modifier = Modifier.height(7.dp))
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -144,132 +111,36 @@ fun SuggestionDetailsScreen(
                 )
             }
             Spacer(modifier = Modifier.height(25.dp))
-            Text(text = "Description",
-                color = MaterialTheme.colorScheme.tertiary,
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.labelMedium,
-                textAlign = TextAlign.Start
-            )
-            Spacer(modifier = Modifier.height(5.dp))
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.background
-                ),
-                shape = RoundedCornerShape(20.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 20.dp)
-            ){
-                /*Text(text = "${suggestion.details?.description?.value}",
-                    modifier = Modifier
-                        .padding(15.dp),
-                    color = MaterialTheme.colorScheme.primary,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Start
-                )*/
-                ExpandableText(text = suggestion.details!!.description!!.value,
-                    modifier  = Modifier
-                        .padding(15.dp))
+
+            if(suggestion.details?.description !=null){
+                DescriptionCard(description = suggestion.details.description.value)
+                Spacer(modifier = Modifier.height(25.dp))
             }
-            Spacer(modifier = Modifier.height(5.dp))
+
+            if(suggestion.details?.taxonomy !=null){
+                TaxonomyCard(taxonomy = suggestion.details.taxonomy)
+                Spacer(modifier = Modifier.height(25.dp))
+            }
+
+            if(suggestion.details?.common_names !=null){
+                CommonNamesCard(commonNames = suggestion.details.common_names)
+                Spacer(modifier = Modifier.height(25.dp))
+            }
+
+            
+            CharacteristicCard(suggestion = suggestion)
+
+            Spacer(modifier = Modifier.height(25.dp))
+
+            LookAlikeCard(suggestion = suggestion )
+
+            Spacer(modifier = Modifier.height(25.dp))
 
         }
     }
 }
 
 
-@Composable
-fun ImagesWithOverlay(leftOverlayImage: String, rightOverlayImage: String) {
-    Column(modifier = Modifier.clip(RoundedCornerShape(15.dp))) {
-        Row {
-            Box(Modifier.weight(1f)) {
-                Image(
-                    painter = painterResource(id = R.drawable.ms001x),
-                    contentDescription = "001x" //Left blank map image
-                )
-                AsyncImage(
-                    model = leftOverlayImage,// Left overlay (left heat map image)
-                    contentDescription = "001xOverlay",
-                    modifier = Modifier.matchParentSize()
-                )
-            }
-            Box(Modifier.weight(1f)) {
-                Image(
-                    painter = painterResource(R.drawable.ms011x), //Right blank map image
-                    contentDescription = "Druga slika"
-                )
-                AsyncImage(
-                    model = rightOverlayImage,// Right overlay (right heat map image)
-                    contentDescription = "001xOverlay",
-                    modifier = Modifier.matchParentSize()
-                )
-            }
-        }
-    }
-}
 
 
-const val DEFAULT_MINIMUM_TEXT_LINE = 6
 
-@Composable
-fun ExpandableText(
-    modifier: Modifier = Modifier,
-    textModifier: Modifier = Modifier,
-    style: TextStyle = LocalTextStyle.current,
-    fontStyle: FontStyle? = null,
-    text: String,
-    collapsedMaxLine: Int = DEFAULT_MINIMUM_TEXT_LINE,
-    showMoreText: String = "... Show More",
-    showMoreStyle: SpanStyle = SpanStyle(fontWeight = FontWeight.Bold),
-    showLessText: String = " Show Less",
-    showLessStyle: SpanStyle = showMoreStyle,
-    textAlign: TextAlign? = null
-) {
-    var isExpanded by remember { mutableStateOf(false) }
-    var clickable by remember { mutableStateOf(false) }
-    var lastCharIndex by remember { mutableStateOf(0) }
-    Box(modifier = Modifier
-        .clickable(clickable) {
-            isExpanded = !isExpanded
-        }
-        .then(modifier)
-    ) {
-        Text(
-            modifier = textModifier
-                .fillMaxWidth()
-                .animateContentSize(),
-            //color = MaterialTheme.colorScheme.primary,
-            fontSize = 12.sp,
-            fontWeight = FontWeight.SemiBold,
-            text = buildAnnotatedString {
-                if (clickable) {
-                    if (isExpanded) {
-                        append(text)
-                        withStyle(style = showLessStyle) { append(showLessText) }
-                    } else {
-                        val adjustText = text.substring(startIndex = 0, endIndex = lastCharIndex)
-                            .dropLast(showMoreText.length)
-                            .dropLastWhile { Character.isWhitespace(it) || it == '.' }
-                        append(adjustText)
-                        withStyle(style = showMoreStyle) { append(showMoreText) }
-                    }
-                } else {
-                    append(text)
-                }
-            },
-            maxLines = if (isExpanded) Int.MAX_VALUE else collapsedMaxLine,
-            fontStyle = fontStyle,
-            onTextLayout = { textLayoutResult ->
-                if (!isExpanded && textLayoutResult.hasVisualOverflow) {
-                    clickable = true
-                    lastCharIndex = textLayoutResult.getLineEnd(collapsedMaxLine - 1)
-                }
-            },
-            style = style,
-            textAlign = textAlign
-        )
-    }
-
-}

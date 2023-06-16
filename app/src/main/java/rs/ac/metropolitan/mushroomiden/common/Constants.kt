@@ -2,7 +2,7 @@ package rs.ac.metropolitan.mushroomiden.common
 
 object Constants {
 
-    const val BASE_IDENTIFICATION__URL = "https://mushroom.kindwise.com/api/v1/"
+    const val BASE_IDENTIFICATION_URL = "https://mushroom.kindwise.com/api/v1/"
     const val DETAILS_IDENTIFICATION_URL = "identification?details=common_names,url,description,edibility,psychoactive,characteristic,look_alike,taxonomy,rank,gbif_id,inaturalist_id,image,images"
 
 
