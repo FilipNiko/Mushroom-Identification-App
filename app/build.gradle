@@ -109,4 +109,11 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
+
+    //Location
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    // Permissions
+    implementation("com.google.accompanist:accompanist-permissions:0.31.1-alpha")
+
 }

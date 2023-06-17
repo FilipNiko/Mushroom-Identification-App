@@ -40,7 +40,7 @@ fun IdentificationResultScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top=15.dp, bottom = 30.dp),
+                            .padding(top=10.dp, bottom = 30.dp),
                         contentAlignment = Alignment.TopCenter
                     ) {
                         Text(

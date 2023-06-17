@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.data.remote.dto
+package rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.dto
 
 data class Details(
     val characteristic: Characteristic,

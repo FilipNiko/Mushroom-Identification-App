@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.data.remote.dto
+package rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.dto
 
 import rs.ac.metropolitan.mushroomiden.domain.model.IdentificationResult
 
@@ -15,7 +15,7 @@ data class IdentificationResultDto(
     val status: String
 )
 
-fun IdentificationResultDto.toIdentificationResult():IdentificationResult{
+fun IdentificationResultDto.toIdentificationResult(): IdentificationResult {
     return IdentificationResult(
         access_token=access_token,
         input=input,

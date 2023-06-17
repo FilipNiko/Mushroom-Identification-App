@@ -4,9 +4,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import rs.ac.metropolitan.mushroomiden.common.Resource
-import rs.ac.metropolitan.mushroomiden.data.remote.dto.IdentificationRequest
-import rs.ac.metropolitan.mushroomiden.data.remote.dto.IdentificationResultDto
-import rs.ac.metropolitan.mushroomiden.data.remote.dto.toIdentificationResult
+import rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.dto.IdentificationRequest
+import rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.dto.toIdentificationResult
 import rs.ac.metropolitan.mushroomiden.domain.model.IdentificationResult
 import rs.ac.metropolitan.mushroomiden.domain.repository.MushroomIdentificationRepository
 import java.io.IOException

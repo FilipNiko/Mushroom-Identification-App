@@ -59,6 +59,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import rs.ac.metropolitan.mushroomiden.R
 import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.IdentificationSharedViewModel
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.BasicInfoCard
 import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.CharacteristicCard
 import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.CommonNamesCard
 import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components.DescriptionCard
@@ -88,15 +89,14 @@ fun SuggestionDetailsScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 5.dp, bottom = 7.dp),
+                    .padding(top = 10.dp, bottom = 7.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "${suggestion.name}",
+                    text = "${suggestion.name}".uppercase(),
                     color = MaterialTheme.colorScheme.primary,
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    style = MaterialTheme.typography.titleLarge,
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.ExtraBold
                 )
             }
 
@@ -111,6 +111,10 @@ fun SuggestionDetailsScreen(
                 )
             }
             Spacer(modifier = Modifier.height(25.dp))
+
+            BasicInfoCard(suggestion = suggestion)
+
+            Spacer(modifier = Modifier.height(22.dp))
 
             if(suggestion.details?.description !=null){
                 DescriptionCard(description = suggestion.details.description.value)

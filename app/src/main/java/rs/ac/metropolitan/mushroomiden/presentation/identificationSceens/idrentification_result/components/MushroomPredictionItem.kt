@@ -24,14 +24,12 @@ import androidx.compose.ui.Alignment.Companion.Top
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContentProviderCompat.requireContext
 import rs.ac.metropolitan.mushroomiden.R
-import rs.ac.metropolitan.mushroomiden.data.remote.dto.Suggestion
+import rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.dto.Suggestion
 
 @Composable
 fun MushroomPredcitionItem(suggestion: Suggestion, context:Context, onSelected: (Suggestion) -> Unit) {

@@ -14,7 +14,6 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,9 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import rs.ac.metropolitan.mushroomiden.data.remote.dto.Characteristic
-import rs.ac.metropolitan.mushroomiden.data.remote.dto.Suggestion
-import rs.ac.metropolitan.mushroomiden.data.remote.dto.Taxonomy
+import rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.dto.Suggestion
 
 @Composable
 fun CharacteristicCard(suggestion: Suggestion) {
@@ -245,14 +242,20 @@ fun CharacteristicCard(suggestion: Suggestion) {
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.labelMedium,
-                            textAlign = TextAlign.Start
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier
+                                .weight(7f)
+                                .align(CenterVertically)
                         )
                         Text(
                             text = "${suggestion.details!!.characteristic.mushroomCapShape}",
                             fontSize = 13.sp,
                             fontWeight = FontWeight.SemiBold,
                             style = MaterialTheme.typography.labelMedium,
-                            textAlign = TextAlign.End
+                            textAlign = TextAlign.End,
+                            modifier = Modifier
+                                .weight(3f)
+                                .align(CenterVertically)
                         )
                     }
 

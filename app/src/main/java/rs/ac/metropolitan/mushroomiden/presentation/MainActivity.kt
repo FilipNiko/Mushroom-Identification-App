@@ -18,8 +18,10 @@ import rs.ac.metropolitan.mushroomiden.presentation.navigation.NavSetup
 import rs.ac.metropolitan.mushroomiden.presentation.navigation.Screen
 import rs.ac.metropolitan.mushroomiden.presentation.theme.AppTheme
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

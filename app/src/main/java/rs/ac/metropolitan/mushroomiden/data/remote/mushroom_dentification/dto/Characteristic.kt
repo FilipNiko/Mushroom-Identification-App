@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.data.remote.dto
+package rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.dto
 
 import com.google.gson.annotations.SerializedName
 
