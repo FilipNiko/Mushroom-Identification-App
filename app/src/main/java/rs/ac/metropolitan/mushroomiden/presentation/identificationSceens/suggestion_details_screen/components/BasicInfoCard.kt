@@ -1,6 +1,5 @@
 package rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.suggestion_details_screen.components
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
@@ -23,7 +22,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -34,7 +32,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.dto.Suggestion
-import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.idrentification_result.components.MushroomPicture
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.identification_result.components.MushroomPicture
 
 
 @Composable

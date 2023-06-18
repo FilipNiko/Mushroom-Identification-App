@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.idrentification_result.components
+package rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.identification_result.components
 
 import android.content.Context
 import android.widget.Toast

@@ -34,7 +34,7 @@ object AppModule {
     @Singleton
     fun provideMushroomIdentificationApi(): MushroomIdentificatorApi {
         return Retrofit.Builder()
-            .baseUrl(Constants.MOCK_URL)
+            .baseUrl(Constants.BASE_IDENTIFICATION_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MushroomIdentificatorApi::class.java)

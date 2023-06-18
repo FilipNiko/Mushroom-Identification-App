@@ -5,6 +5,7 @@ import android.location.Location
 import android.net.Uri
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Tasks.await
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import rs.ac.metropolitan.mushroomiden.common.Constants
 import rs.ac.metropolitan.mushroomiden.common.Resource
 import rs.ac.metropolitan.mushroomiden.common.util.HeatMapUrlBuilder
 import rs.ac.metropolitan.mushroomiden.common.util.ImageConverter
@@ -27,6 +29,7 @@ import rs.ac.metropolitan.mushroomiden.domain.use_case.completed_identifications
 import rs.ac.metropolitan.mushroomiden.domain.model.LocationResultInfo
 import rs.ac.metropolitan.mushroomiden.domain.use_case.get_identification.GetIdentificationUseCase
 import rs.ac.metropolitan.mushroomiden.domain.model.CompletedIdentificationEntity
+import rs.ac.metropolitan.mushroomiden.domain.use_case.get_identification.RetrieveIdentificationUseCase
 import rs.ac.metropolitan.mushroomiden.domain.use_case.get_location_info.GetLocationResultInfoUseCase
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -39,8 +42,10 @@ class IdentificationSharedViewModel @Inject constructor(
     private val getIdentificationUseCase: GetIdentificationUseCase,
     private val getLocationResultInfoUseCase: GetLocationResultInfoUseCase,
     private val locationTracker: LocationTracker,
-    private val addCompletedIdentificationUseCase: AddCompletedIdentificationUseCase
+    private val addCompletedIdentificationUseCase: AddCompletedIdentificationUseCase,
+    private val retrieveIdentificationUseCase: RetrieveIdentificationUseCase
 ) : ViewModel() {
+
 
 
     //Uris of images added by user
@@ -62,6 +67,15 @@ class IdentificationSharedViewModel @Inject constructor(
     //Detail location info state
     private val _locationInfoState = mutableStateOf(LocationResultInfoState())
     val locationInfoState: State<LocationResultInfoState> = _locationInfoState
+
+
+    //Use Location
+    private val _useLocationState = mutableStateOf(false)
+    val useLocationState: State<Boolean> = _useLocationState
+
+    fun setUseLocation(checked: Boolean) {
+        _useLocationState.value = checked
+    }
 
 
     //Specific identification result details
@@ -116,14 +130,13 @@ class IdentificationSharedViewModel @Inject constructor(
     }
 
 
-
     fun getIdentificationResultAndInsertIntoDatabase(contentResolver: ContentResolver) {
         viewModelScope.launch {
             convertUrisToBase64(contentResolver)
             getIdentificationResult()
 
             delay(3000)
-            if (_state.value.identificationResult?.access_token!=null){
+            if (_state.value.identificationResult?.access_token != null) {
                 insertCompletedIdentificationInDatabase()
             }
         }
@@ -142,7 +155,7 @@ class IdentificationSharedViewModel @Inject constructor(
 
     private suspend fun getIdentificationResult() {
 
-        if(_locationInfoState.value.locationResultInfo?.latitude!=null && _locationInfoState.value.locationResultInfo?.longitude!=null){
+        if (_locationInfoState.value.locationResultInfo?.latitude != null && _locationInfoState.value.locationResultInfo?.longitude != null && useLocationState.value) {
             val ir = IdentificationRequest(
                 _base64Strings.value,
                 locationInfoState.value.locationResultInfo!!.latitude,
@@ -150,9 +163,9 @@ class IdentificationSharedViewModel @Inject constructor(
                 true
             )
             getIdentificationResult(ir)
-        }else{
+        } else {
             val ir = IdentificationRequest(
-                images= _base64Strings.value,
+                images = _base64Strings.value,
                 similar_images = true
             )
             getIdentificationResult(ir)
@@ -206,6 +219,32 @@ class IdentificationSharedViewModel @Inject constructor(
         return HeatMapUrlBuilder.getUrlForLeftHeatImage(suggestionDetails.value.details!!.gbif_id)
     }
 
+
+     fun getIdentificationsByAccessToken(accessToken: String){
+        if(accessToken!="0"){
+            retrieveIdentificationResult(accessToken)
+        }
+    }
+
+    private fun retrieveIdentificationResult(accessToken: String) {
+        retrieveIdentificationUseCase(accessToken).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _state.value = IdentificationResultState(identificationResult = result.data)
+                }
+
+                is Resource.Error -> {
+                    _state.value = IdentificationResultState(
+                        error = result.message ?: "An unexpected error occured"
+                    )
+                }
+
+                is Resource.Loading -> {
+                    _state.value = IdentificationResultState(isLoading = true)
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
 
 }
 

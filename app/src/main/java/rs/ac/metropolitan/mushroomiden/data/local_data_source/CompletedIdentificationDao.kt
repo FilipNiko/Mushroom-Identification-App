@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 
 import androidx.room.Upsert
+import kotlinx.coroutines.flow.Flow
 import rs.ac.metropolitan.mushroomiden.domain.model.CompletedIdentificationEntity
 
 @Dao
@@ -12,6 +13,6 @@ interface CompletedIdentificationDao {
     @Upsert
     suspend fun upsertCompletedIdentification(completedIdentificationEntity: CompletedIdentificationEntity)
 
-    @Query("SELECT * FROM CompletedIdentificationEntity WHERE accessToken = :accessToken")
-    suspend fun getCompletedIdentificationByAccessToken(accessToken:String): CompletedIdentificationEntity?
+    @Query("SELECT * FROM CompletedIdentificationEntity")
+    fun getAllCompletedIdentifications(): Flow<List<CompletedIdentificationEntity>>
 }

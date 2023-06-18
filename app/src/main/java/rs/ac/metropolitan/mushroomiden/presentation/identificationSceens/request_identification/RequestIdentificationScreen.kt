@@ -74,7 +74,7 @@ fun RequestIdentificationScreen(
                 if(selectedImageUris.isNotEmpty()) {
                     Button(onClick = {
                         viewModel.getIdentificationResultAndInsertIntoDatabase(contentResolver)
-                        navController.navigate(Screen.IdentificationResultScreen.route)
+                        navController.navigate(Screen.IdentificationResultScreen.route + "/0")
                     }) {
                         Text(text = "Get Identification result")
                     }
@@ -109,6 +109,10 @@ fun LocationScreen(
         )
     )
 
+    var checked by remember {
+        mutableStateOf(false)
+    }
+
     val currentLocation by viewModel.locationInfoState
 
     Box(
@@ -124,9 +128,7 @@ fun LocationScreen(
             ) {
                 if (areGranted) {
 
-                    var checked by remember {
-                        mutableStateOf(false)
-                    }
+
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Checkbox(
@@ -136,6 +138,7 @@ fun LocationScreen(
                                 if(checked){
                                     viewModel.getCurrentLocationWithDetails()
                                 }
+                                viewModel.setUseLocation(checked_)
                             }
                         )
 
@@ -144,7 +147,7 @@ fun LocationScreen(
                             text = "Use my location with this identification request"
                         )
                     }
-                    if(currentLocation.locationResultInfo?.city!=null && currentLocation.locationResultInfo?.countryName!=null){
+                    if(currentLocation.locationResultInfo?.city!=null && currentLocation.locationResultInfo?.countryName!=null && checked){
                         Text(text = "Current location near: ${currentLocation.locationResultInfo!!.city}, ${currentLocation.locationResultInfo!!.countryName}")
                     }else if(currentLocation.locationResultInfo==null && checked){
                         Text(text = "Error: Please turn of you location")

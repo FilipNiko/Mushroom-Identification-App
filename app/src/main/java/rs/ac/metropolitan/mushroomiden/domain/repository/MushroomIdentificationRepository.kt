@@ -8,4 +8,7 @@ interface MushroomIdentificationRepository {
 
 
     suspend fun getIdentification(identificationRequest: IdentificationRequest): IdentificationResultDto
+
+
+    suspend fun retrieveIdentification(accessToken:String): IdentificationResultDto
 }

@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.idrentification_result
+package rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.identification_result
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +10,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -19,14 +20,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.IdentificationSharedViewModel
-import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.idrentification_result.components.MushroomPredcitionItem
+import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.identification_result.components.MushroomPredcitionItem
 import rs.ac.metropolitan.mushroomiden.presentation.navigation.Screen
 
 @Composable
 fun IdentificationResultScreen(
     navController: NavController,
-    viewModel: IdentificationSharedViewModel
+    viewModel: IdentificationSharedViewModel,
+    accessToken:String
 ) {
+
+    LaunchedEffect(Unit) {
+        viewModel.getIdentificationsByAccessToken(accessToken)
+    }
 
     val state = viewModel.state.value
 

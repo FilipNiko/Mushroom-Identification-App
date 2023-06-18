@@ -11,4 +11,8 @@ class MushromIdentificationRepositoryImpl @Inject constructor(private val api: M
     override suspend fun getIdentification(identificationRequest: IdentificationRequest): IdentificationResultDto {
         return api.getIdentification(identificationRequest)
     }
+
+    override suspend fun retrieveIdentification(accessToken: String): IdentificationResultDto {
+        return api.retrieveIdentification(accessToken)
+    }
 }
