@@ -35,7 +35,7 @@ fun HistoryItemCard(completedIdentification: CompletedIdentificationEntity, onIt
             .fillMaxWidth()
             .clickable { onItemClick(completedIdentification) },
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.background
+            containerColor = MaterialTheme.colorScheme.surface
         ),
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 20.dp)
@@ -65,7 +65,7 @@ fun HistoryItemCard(completedIdentification: CompletedIdentificationEntity, onIt
                     Icon(
                         imageVector = Icons.Default.CalendarMonth,
                         contentDescription = "calendar icon",
-                        tint = MaterialTheme.colorScheme.inversePrimary,
+                        tint = MaterialTheme.colorScheme.primary,
                     )
 
                     Text(
@@ -85,13 +85,13 @@ fun HistoryItemCard(completedIdentification: CompletedIdentificationEntity, onIt
                     Icon(
                         imageVector = Icons.Rounded.PinDrop,
                         contentDescription = "location icon",
-                        tint = MaterialTheme.colorScheme.inversePrimary
+                        tint = MaterialTheme.colorScheme.onSurface
                     )
 
                     if(completedIdentification.latitude != null && completedIdentification.latitude != 0.0){
                         Text(
                             text = "Near: ${completedIdentification.city} - ${completedIdentification.country}",
-                            color = MaterialTheme.colorScheme.secondary,
+                            color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 13.sp,
                             lineHeight = 14.sp,
                             modifier = Modifier.align(Alignment.CenterVertically)
@@ -99,7 +99,7 @@ fun HistoryItemCard(completedIdentification: CompletedIdentificationEntity, onIt
                     }else{
                         Text(
                             text = "No location was provided at the time of the request",
-                            color = MaterialTheme.colorScheme.secondary,
+                            color = MaterialTheme.colorScheme.onSurface,
                             fontSize = 13.sp,
                             lineHeight = 14.sp,
                             modifier = Modifier.align(Alignment.CenterVertically)

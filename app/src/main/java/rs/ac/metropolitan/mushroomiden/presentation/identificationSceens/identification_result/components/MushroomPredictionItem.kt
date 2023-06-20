@@ -61,8 +61,8 @@ fun MushroomPredcitionItem(suggestion: Suggestion, context:Context, onSelected: 
                 .background(
                     brush = Brush.linearGradient(
                         colors = listOf(
-                            MaterialTheme.colorScheme.surfaceTint,
-                            MaterialTheme.colorScheme.primaryContainer
+                            MaterialTheme.colorScheme.error,
+                            MaterialTheme.colorScheme.surface
                         )
                     )
                 )
@@ -78,15 +78,15 @@ fun MushroomPredcitionItem(suggestion: Suggestion, context:Context, onSelected: 
             ) {
                 Text(
                     text = "${suggestion.name}".uppercase(),
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    fontSize = 22.sp,
+                    color = MaterialTheme.colorScheme.onError,
+                    fontSize = 23.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = "Probability: ${formattedPercentage}",
                     color = MaterialTheme.colorScheme.onSurface,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Normal
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.SemiBold
                 )
             }
 

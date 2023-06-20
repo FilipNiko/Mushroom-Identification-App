@@ -15,7 +15,7 @@ interface MushroomIdentificatorApi {
         "Content-Type: application/json",
         "Api-Key:GTpFI8Ds85GK1NaI6sH0vT8p2WRHr4kdrpa5vqrRShm2KAZIVf"
     )
-    @POST(Constants.DETAILS_IDENTIFICATION_URL)
+    @POST(Constants.MOCK_DETAILS_URL)
     suspend fun getIdentification(@Body identificationRequest: IdentificationRequest): IdentificationResultDto
 
 
@@ -23,7 +23,7 @@ interface MushroomIdentificatorApi {
         "Content-Type: application/json",
         "Api-Key:GTpFI8Ds85GK1NaI6sH0vT8p2WRHr4kdrpa5vqrRShm2KAZIVf"
     )
-    @GET("identification/{accessToken}" + Constants.DETAILS_RETRIEVE_IDENTIFICATION_URL)
+    @GET("get/{accessToken}" /*+ Constants.DETAILS_RETRIEVE_IDENTIFICATION_URL*/)
     suspend fun retrieveIdentification(@Path("accessToken") accessToken: String): IdentificationResultDto
 
 }

@@ -89,14 +89,16 @@ fun SuggestionDetailsScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 10.dp, bottom = 7.dp),
+                    .padding(top = 10.dp, bottom = 3.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
                     text = "${suggestion.name}".uppercase(),
                     color = MaterialTheme.colorScheme.primary,
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.ExtraBold
+                    fontSize=30.sp,
+                    fontWeight= FontWeight.ExtraBold,
+                    lineHeight = 35.sp,
+                    textAlign = TextAlign.Center
                 )
             }
 

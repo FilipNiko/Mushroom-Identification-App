@@ -46,12 +46,13 @@ fun IdentificationResultScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top=10.dp, bottom = 30.dp),
+                            .padding(top=10.dp, bottom = 20.dp),
                         contentAlignment = Alignment.TopCenter
                     ) {
                         Text(
                             text = "Predictions",
                             fontSize=30.sp,
+                            lineHeight = 35.sp,
                             fontWeight= FontWeight.ExtraBold,
                             color = MaterialTheme.colorScheme.primary
                         )

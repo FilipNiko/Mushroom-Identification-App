@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -36,7 +37,7 @@ fun MushroomPicture(
     AlertDialog(
         shape = RoundedCornerShape(20.dp),
         onDismissRequest = { onDismiss() },
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = MaterialTheme.colorScheme.surface,
         text = {
             ImageSlide(name = name, images = images)
         },
@@ -78,13 +79,14 @@ fun ImageSlide(name:String, images: List<Image>) {
             modifier = Modifier
                 .fillMaxWidth()
                 .align(CenterHorizontally)
-                .padding(top = 30.dp, start = 30.dp, end = 30.dp, bottom = 30.dp)
+                .clip(RoundedCornerShape(20.dp))
+                .padding(top = 15.dp, start = 20.dp, end = 20.dp, bottom = 15.dp)
                 .weight(3f)
         )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 6.dp)
+                .padding(top = 4.dp)
                 .weight(0.8f)
         ) {
             Text(
@@ -94,7 +96,8 @@ fun ImageSlide(name:String, images: List<Image>) {
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 fontSize = 35.sp,
-                lineHeight = 40.sp
+                lineHeight = 40.sp,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
         Row(

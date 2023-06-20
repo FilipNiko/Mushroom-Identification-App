@@ -60,7 +60,7 @@ fun BottomNav() {
     Scaffold(
         bottomBar = {
             NavigationBar(
-                containerColor = MaterialTheme.colorScheme.inversePrimary,
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
             ){
                 bottomNavItems.forEach { item ->
                     NavigationBarItem(
@@ -70,7 +70,7 @@ fun BottomNav() {
                                 imageVector = item.icon,
                                 contentDescription = item.name,
                                 tint = if (lastTopItemSlected == item.route)
-                                    MaterialTheme.colorScheme.onSurface
+                                    MaterialTheme.colorScheme.onPrimaryContainer
                                 else
                                     MaterialTheme.colorScheme.onPrimary
                             )
@@ -79,7 +79,7 @@ fun BottomNav() {
                             Text(
                                 text = item.name,
                                 color = if (lastTopItemSlected == item.route)
-                                    MaterialTheme.colorScheme.inverseOnSurface
+                                    MaterialTheme.colorScheme.onPrimaryContainer
                                 else
                                     MaterialTheme.colorScheme.onPrimary,
                                 fontWeight = if (lastTopItemSlected == item.route)
