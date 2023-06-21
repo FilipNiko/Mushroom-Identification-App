@@ -11,18 +11,20 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import rs.ac.metropolitan.mushroomiden.common.Constants
-import rs.ac.metropolitan.mushroomiden.data.local_data_source.CompletedIdentificationDatabase
+import rs.ac.metropolitan.mushroomiden.data.local_data_source.completed_identifications.CompletedIdentificationDatabase
+import rs.ac.metropolitan.mushroomiden.data.local_data_source.quiz.QuestionsAndAnswersDatabase
 import rs.ac.metropolitan.mushroomiden.data.location.DefaultLocationTracker
 import rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.MushroomIdentificatorApi
 import rs.ac.metropolitan.mushroomiden.data.remote.reverse_geocoding.ReverseGeocodingApi
 import rs.ac.metropolitan.mushroomiden.data.repository.CompletedIdentificationRepositoryImpl
 import rs.ac.metropolitan.mushroomiden.data.repository.MushromIdentificationRepositoryImpl
+import rs.ac.metropolitan.mushroomiden.data.repository.QuestionsAndAnswersRepositoryImpl
 import rs.ac.metropolitan.mushroomiden.data.repository.ReverseGeocodingRepisotoryImpl
 import rs.ac.metropolitan.mushroomiden.domain.location.LocationTracker
 import rs.ac.metropolitan.mushroomiden.domain.repository.CompletedIdentificationsRepository
 import rs.ac.metropolitan.mushroomiden.domain.repository.MushroomIdentificationRepository
+import rs.ac.metropolitan.mushroomiden.domain.repository.QuestionsAndAswersRepository
 import rs.ac.metropolitan.mushroomiden.domain.repository.ReverseGeocodingRepository
-import rs.ac.metropolitan.mushroomiden.domain.use_case.completed_identifications.AddCompletedIdentificationUseCase
 import javax.inject.Singleton
 
 @Module
@@ -34,7 +36,7 @@ object AppModule {
     @Singleton
     fun provideMushroomIdentificationApi(): MushroomIdentificatorApi {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_IDENTIFICATION_URL)
+            .baseUrl(Constants.MOCK_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MushroomIdentificatorApi::class.java)
@@ -78,6 +80,24 @@ object AppModule {
     @Singleton
     fun provideCompletedIdentificationRepository(db: CompletedIdentificationDatabase): CompletedIdentificationsRepository {
         return CompletedIdentificationRepositoryImpl(db.completedIdentificationDao)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideQuestionsAndAnswersDatabase(app: Application): QuestionsAndAnswersDatabase {
+        return Room.databaseBuilder(
+            app,
+            QuestionsAndAnswersDatabase::class.java,
+            QuestionsAndAnswersDatabase.DATABASE_NAME
+        ).createFromAsset("database/questions_and_answers.db")
+             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuestionsAndAnswersRepository(db: QuestionsAndAnswersDatabase): QuestionsAndAswersRepository {
+        return QuestionsAndAnswersRepositoryImpl(db.questionsAndAnswersDao)
     }
 
 

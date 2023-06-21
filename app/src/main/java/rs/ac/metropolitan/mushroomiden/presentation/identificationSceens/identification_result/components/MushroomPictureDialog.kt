@@ -2,6 +2,7 @@ package rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.identi
 
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,9 +18,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -55,7 +58,6 @@ fun MushroomPicture(
             }
         }
     )
-
 }
 
 
@@ -73,21 +75,29 @@ fun ImageSlide(name:String, images: List<Image>) {
             .fillMaxSize()
     ) {
 
-        AsyncImage(
-            model = images[currentIndex].value,
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(CenterHorizontally)
-                .clip(RoundedCornerShape(20.dp))
-                .padding(top = 15.dp, start = 20.dp, end = 20.dp, bottom = 15.dp)
-                .weight(3f)
-        )
-        Column(
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .weight(3f),
+            horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            AsyncImage(
+                model = images[currentIndex].value,
+                contentDescription = null,
+                modifier = Modifier
+                    .shadow(elevation = 20.dp)
+                    .clip(RoundedCornerShape(10.dp))
+            )
+        }
+
+
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp)
-                .weight(0.8f)
+                .weight(0.8f),
+            verticalAlignment = Alignment.Bottom
         ) {
             Text(
                 text = mushroomName,
@@ -105,7 +115,8 @@ fun ImageSlide(name:String, images: List<Image>) {
                 .fillMaxWidth()
                 .padding(top = 20.dp)
                 .weight(0.5f),
-            horizontalArrangement = Arrangement.SpaceAround
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.Bottom
         ) {
             Button(
                 onClick = {

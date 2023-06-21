@@ -43,6 +43,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.NoPhotography
 import androidx.compose.material.icons.rounded.PhotoAlbum
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
@@ -169,15 +170,27 @@ fun RequestIdentificationScreen(
 
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top=7.dp),
+            horizontalArrangement = Arrangement.Center
+
         ) {
             if (selectedImageUris.isNotEmpty()) {
-                Button(onClick = {
+                Button(
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                    shape = RoundedCornerShape(9.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = {
                     viewModel.getIdentificationResultAndInsertIntoDatabase(contentResolver)
                     navController.navigate(Screen.IdentificationResultScreen.route + "/0")
                 }) {
-                    Text(text = "Get Identification result")
+                    Text(
+                        text = "Get Identification result",
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 }
             }
         }

@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.data.local_data_source
+package rs.ac.metropolitan.mushroomiden.data.local_data_source.completed_identifications
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
