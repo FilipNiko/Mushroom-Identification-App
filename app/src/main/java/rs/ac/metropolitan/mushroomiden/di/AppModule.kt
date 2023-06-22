@@ -12,18 +12,21 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import rs.ac.metropolitan.mushroomiden.common.Constants
 import rs.ac.metropolitan.mushroomiden.data.local_data_source.completed_identifications.CompletedIdentificationDatabase
-import rs.ac.metropolitan.mushroomiden.data.local_data_source.quiz.QuestionsAndAnswersDatabase
+import rs.ac.metropolitan.mushroomiden.data.local_data_source.quiz_questions_answers.QuestionsAndAnswersDatabase
+import rs.ac.metropolitan.mushroomiden.data.local_data_source.quiz_scoreboard.QuizScoreboardDatabase
 import rs.ac.metropolitan.mushroomiden.data.location.DefaultLocationTracker
 import rs.ac.metropolitan.mushroomiden.data.remote.mushroom_dentification.MushroomIdentificatorApi
 import rs.ac.metropolitan.mushroomiden.data.remote.reverse_geocoding.ReverseGeocodingApi
 import rs.ac.metropolitan.mushroomiden.data.repository.CompletedIdentificationRepositoryImpl
 import rs.ac.metropolitan.mushroomiden.data.repository.MushromIdentificationRepositoryImpl
 import rs.ac.metropolitan.mushroomiden.data.repository.QuestionsAndAnswersRepositoryImpl
+import rs.ac.metropolitan.mushroomiden.data.repository.QuizScoreboardRepositoryImpl
 import rs.ac.metropolitan.mushroomiden.data.repository.ReverseGeocodingRepisotoryImpl
 import rs.ac.metropolitan.mushroomiden.domain.location.LocationTracker
 import rs.ac.metropolitan.mushroomiden.domain.repository.CompletedIdentificationsRepository
 import rs.ac.metropolitan.mushroomiden.domain.repository.MushroomIdentificationRepository
 import rs.ac.metropolitan.mushroomiden.domain.repository.QuestionsAndAswersRepository
+import rs.ac.metropolitan.mushroomiden.domain.repository.QuizScoreboardRepository
 import rs.ac.metropolitan.mushroomiden.domain.repository.ReverseGeocodingRepository
 import javax.inject.Singleton
 
@@ -36,7 +39,7 @@ object AppModule {
     @Singleton
     fun provideMushroomIdentificationApi(): MushroomIdentificatorApi {
         return Retrofit.Builder()
-            .baseUrl(Constants.MOCK_URL)
+            .baseUrl(Constants.BASE_IDENTIFICATION_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MushroomIdentificatorApi::class.java)
@@ -101,6 +104,21 @@ object AppModule {
     }
 
 
+    @Provides
+    @Singleton
+    fun provideQuizScoreboardDatabase(app: Application): QuizScoreboardDatabase {
+        return Room.databaseBuilder(
+            app,
+            QuizScoreboardDatabase::class.java,
+            QuizScoreboardDatabase.DATABASE_NAME
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuizScoreboardRepository(db: QuizScoreboardDatabase): QuizScoreboardRepository {
+        return QuizScoreboardRepositoryImpl(db.quizScoreboardDao)
+    }
 
 
     @Provides

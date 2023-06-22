@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.presentation.quiz_screens
+package rs.ac.metropolitan.mushroomiden.presentation.quiz_screens.quiz_inside_screen
 
 
 import androidx.compose.runtime.getValue

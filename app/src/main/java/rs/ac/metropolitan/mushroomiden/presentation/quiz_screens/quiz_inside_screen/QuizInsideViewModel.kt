@@ -9,8 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import rs.ac.metropolitan.mushroomiden.domain.model.QuestionsAndAnswersEntity
-import rs.ac.metropolitan.mushroomiden.presentation.quiz_screens.QuestionsAndAnswersState
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -21,14 +20,17 @@ class QuizInsideViewModel @Inject constructor(
 
     //Questions and answers state
     private val _allQuestionsAndAnswersState = mutableStateOf(QuestionsAndAnswersState())
-    val allQuestionsAndAnswersState : State<QuestionsAndAnswersState> = _allQuestionsAndAnswersState
+    val allQuestionsAndAnswersState: State<QuestionsAndAnswersState> = _allQuestionsAndAnswersState
 
 
     private var getAllQuestionsAndAnswersJob: Job? = null
 
 
     private val _currentScoreState = mutableStateOf(0);
-    val currentScoreState : State<Int> = _currentScoreState
+    val currentScoreState: State<Int> = _currentScoreState
+
+    private val _numberOfQuestions = mutableStateOf(0);
+    val numberOfQuestions: State<Int> = _numberOfQuestions
 
 
     init {
@@ -40,6 +42,7 @@ class QuizInsideViewModel @Inject constructor(
         getAllQuestionsAndAnswersJob?.cancel()
         getAllQuestionsAndAnswersJob = getAllQuestionsAndAnswersUseCase()
             .onEach { questionsAndAnswers ->
+                _numberOfQuestions.value = questionsAndAnswers.size - 1
                 _allQuestionsAndAnswersState.value = allQuestionsAndAnswersState.value.copy(
                     questionsAndAnswers = questionsAndAnswers,
                 )
@@ -48,7 +51,7 @@ class QuizInsideViewModel @Inject constructor(
     }
 
 
-    fun increaseScoreByOne(){
+    fun increaseScoreByOne() {
         _currentScoreState.value++
     }
 

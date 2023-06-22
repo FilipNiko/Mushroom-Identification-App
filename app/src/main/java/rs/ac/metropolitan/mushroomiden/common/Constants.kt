@@ -22,6 +22,8 @@ object Constants {
 
     const val PARAM_ACCESS_TOKEN = "accesToken"
     const val PARAM_SCORE = "score"
+    const val ELAPSED_TIME = "time"
+    const val IS_WON = "won"
 
 
 }

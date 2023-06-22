@@ -19,12 +19,10 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import rs.ac.metropolitan.mushroomiden.presentation.Greeting3
 import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.IdentificationSharedViewModel
 import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.identification_result.IdentificationResultScreen
 import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.request_identification.RequestIdentificationScreen
@@ -124,7 +122,7 @@ fun BottomNav() {
             }
 
             composable(
-                route = Screen.QuizWrongAnswerScreen.route + "/{score}"
+                route = Screen.QuizWrongAnswerScreen.route + "/{score}/{time}/{won}"
             ) {
                 QuizWrongAnswerScreen(navController)
             }

@@ -36,6 +36,8 @@ fun QuizWrongAnswerScreen(
 
     val score = viewModel.scoreState.value
 
+    val isWon = viewModel.isWon.value
+
    Column(
        modifier = Modifier
            .fillMaxSize()
@@ -48,13 +50,26 @@ fun QuizWrongAnswerScreen(
                .padding(top = 30.dp, bottom = 4.dp),
            horizontalArrangement = Arrangement.Center
        ) {
-           Text(
-               text = "Wrong answer",
-               color = MaterialTheme.colorScheme.primary,
-               fontSize = 35.sp,
-               fontWeight = FontWeight.ExtraBold,
-               textAlign = TextAlign.Center
-           )
+
+           if(isWon){
+
+               Text(
+                   text = "You won",
+                   color = MaterialTheme.colorScheme.primary,
+                   fontSize = 35.sp,
+                   fontWeight = FontWeight.ExtraBold,
+                   textAlign = TextAlign.Center
+               )
+
+           }else{
+               Text(
+                   text = "Wrong answer",
+                   color = MaterialTheme.colorScheme.primary,
+                   fontSize = 35.sp,
+                   fontWeight = FontWeight.ExtraBold,
+                   textAlign = TextAlign.Center
+               )
+           }
        }
 
        Spacer(modifier = Modifier.height(45.dp))
@@ -65,13 +80,27 @@ fun QuizWrongAnswerScreen(
                .fillMaxWidth(),
            horizontalArrangement = Arrangement.Center
        ) {
-           Image(
-               painter = painterResource(id = R.drawable.sad_mushroom_ps),
-               contentDescription = "sad_mushroom",
-               contentScale = ContentScale.FillWidth,
-               modifier = Modifier
-                   .fillMaxWidth()
-                   .padding(start = 35.dp))
+
+           if(isWon){
+
+               Image(
+                   painter = painterResource(id = R.drawable.happy_mushroom),
+                   contentDescription = "happy_mushroom",
+                   contentScale = ContentScale.FillWidth,
+                   modifier = Modifier
+                       .fillMaxWidth()
+                   .padding(start = 7.dp))
+
+
+           }else{
+               Image(
+                   painter = painterResource(id = R.drawable.sad_mushroom_ps),
+                   contentDescription = "sad_mushroom",
+                   contentScale = ContentScale.FillWidth,
+                   modifier = Modifier
+                       .fillMaxWidth()
+                       .padding(start = 35.dp))
+           }
 
        }
        Row(

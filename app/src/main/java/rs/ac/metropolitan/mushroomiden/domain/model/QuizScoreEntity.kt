@@ -1,0 +1,14 @@
+package rs.ac.metropolitan.mushroomiden.domain.model
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class QuizScoreEntity (
+
+    @PrimaryKey(autoGenerate = true)
+    val id:Int,
+    val gameDate:String,
+    val elapsedTime:String,
+    val score:Int,
+)

@@ -9,27 +9,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Gamepad
-import androidx.compose.material.icons.rounded.QuestionAnswer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -39,7 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import rs.ac.metropolitan.mushroomiden.presentation.navigation.Screen
-import rs.ac.metropolitan.mushroomiden.presentation.quiz_screens.quiz_main_screen.QuizMainScreenViewModel
+
 
 @Composable
 fun QuizInsideScreen(
@@ -50,6 +42,12 @@ fun QuizInsideScreen(
     val questionsAndAnswersState = viewModel.allQuestionsAndAnswersState.value
 
     var currentQuestionIndex = viewModel.currentScoreState.value
+
+    var numberOfQuestions = viewModel.numberOfQuestions.value
+
+    var time = remember {
+        System.currentTimeMillis()
+    }
 
     Box(
         modifier = Modifier
@@ -65,6 +63,21 @@ fun QuizInsideScreen(
             itemsIndexed(questionsAndAnswersState.questionsAndAnswers) { index, questionAndAnswer ->
                 if (index == currentQuestionIndex) {
                     Column(modifier = Modifier.fillMaxSize()) {
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 4.dp),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Text(
+                                text = "Score: ${currentQuestionIndex}",
+                                color = MaterialTheme.colorScheme.primary,
+                                fontSize = 27.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                textAlign = TextAlign.Center
+                            )
+                        }
 
                         Row(
                             modifier = Modifier
@@ -104,7 +117,8 @@ fun QuizInsideScreen(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = 40.dp)
+                                .padding(top = 40.dp),
+                            verticalAlignment = Alignment.Bottom
                         ) {
                             Button(
                                 modifier = Modifier.fillMaxSize(),
@@ -113,8 +127,17 @@ fun QuizInsideScreen(
                                 onClick = {
                                     if (questionAndAnswer.firstAnswer == questionAndAnswer.correctAnswer) {
                                         viewModel.increaseScoreByOne()
-                                    } else {
-                                        navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}")
+
+                                        if(currentQuestionIndex ==numberOfQuestions){
+                                            time = System.currentTimeMillis() - time
+                                            navController.popBackStack()
+                                            navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}/${time}/true")
+                                        }
+                                    }
+                                    else {
+                                        time = System.currentTimeMillis() - time
+                                        navController.popBackStack()
+                                        navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}/${time}/false")
                                     }
 
                                 }) {
@@ -140,8 +163,16 @@ fun QuizInsideScreen(
                                 onClick = {
                                     if (questionAndAnswer.secondAnswer == questionAndAnswer.correctAnswer) {
                                         viewModel.increaseScoreByOne()
+
+                                        if(currentQuestionIndex ==numberOfQuestions){
+                                            time = System.currentTimeMillis() - time
+                                            navController.popBackStack()
+                                            navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}/${time}/true")
+                                        }
                                     } else {
-                                        navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}")
+                                        time = System.currentTimeMillis() - time
+                                        navController.popBackStack()
+                                        navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}/${time}/false")
                                     }
                                 }) {
                                 Text(
@@ -164,8 +195,16 @@ fun QuizInsideScreen(
                                 onClick = {
                                     if (questionAndAnswer.thirdAnswer == questionAndAnswer.correctAnswer) {
                                         viewModel.increaseScoreByOne()
+
+                                        if(currentQuestionIndex ==numberOfQuestions){
+                                            time = System.currentTimeMillis() - time
+                                            navController.popBackStack()
+                                            navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}/${time}/true")
+                                        }
                                     } else {
-                                        navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}")
+                                        time = System.currentTimeMillis() - time
+                                        navController.popBackStack()
+                                        navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}/${time}/false")
                                     }
                                 }) {
                                 Text(
@@ -188,9 +227,16 @@ fun QuizInsideScreen(
                                 onClick = {
                                     if (questionAndAnswer.fourthAnswer == questionAndAnswer.correctAnswer) {
                                         viewModel.increaseScoreByOne()
+
+                                        if(currentQuestionIndex ==numberOfQuestions){
+                                            time = System.currentTimeMillis() - time
+                                            navController.popBackStack()
+                                            navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}/${time}/true")
+                                        }
                                     } else {
+                                        time = System.currentTimeMillis() - time
                                         navController.popBackStack()
-                                        navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}")
+                                        navController.navigate(Screen.QuizWrongAnswerScreen.route + "/${currentQuestionIndex}/${time}/false")
                                     }
                                 }){
 

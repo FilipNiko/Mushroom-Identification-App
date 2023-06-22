@@ -1,4 +1,4 @@
-package rs.ac.metropolitan.mushroomiden.data.local_data_source.quiz
+package rs.ac.metropolitan.mushroomiden.data.local_data_source.quiz_questions_answers
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
