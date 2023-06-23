@@ -68,10 +68,10 @@ fun HistoryScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.NoPhotography,
-                            contentDescription = "location icon",
-                            tint = MaterialTheme.colorScheme.tertiary,
+                            contentDescription = "no history",
+                            tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier
-                                .size(70.dp)
+                                .size(90.dp)
                                 .align(Center)
                         )
                     }

@@ -50,6 +50,18 @@ class IdentificationSharedViewModel @Inject constructor(
         _selectedImageUris.value = uris
     }
 
+    fun addNewUri(uri:Uri) {
+        val currentUris = _selectedImageUris.value.toMutableList()
+        currentUris.add(uri)
+        _selectedImageUris.value = currentUris
+    }
+
+    fun removeUri(uri:Uri) {
+        val currentUris = _selectedImageUris.value.toMutableList()
+        currentUris.remove(uri)
+        _selectedImageUris.value = currentUris
+    }
+
     //Images converted to base64 Strings
     private val _base64Strings = MutableStateFlow<List<String>>(emptyList())
 
@@ -129,7 +141,7 @@ class IdentificationSharedViewModel @Inject constructor(
             convertUrisToBase64(contentResolver)
             getIdentificationResult()
 
-            delay(3000)
+            delay(5000)
             if (_state.value.identificationResult?.access_token != null) {
                 insertCompletedIdentificationInDatabase()
             }
