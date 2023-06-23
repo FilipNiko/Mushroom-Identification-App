@@ -1,8 +1,6 @@
 package rs.ac.metropolitan.mushroomiden.common.util
 
 import android.content.ContentResolver
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Base64
 import java.io.ByteArrayOutputStream

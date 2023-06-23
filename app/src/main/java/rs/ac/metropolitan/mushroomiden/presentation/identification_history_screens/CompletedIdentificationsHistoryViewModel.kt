@@ -8,10 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import rs.ac.metropolitan.mushroomiden.common.Resource
 import rs.ac.metropolitan.mushroomiden.domain.use_case.completed_identifications.GetAllCompletedIdentificationsUseCase
 import rs.ac.metropolitan.mushroomiden.domain.use_case.get_identification.RetrieveIdentificationUseCase
-import rs.ac.metropolitan.mushroomiden.presentation.identificationSceens.IdentificationResultState
 import javax.inject.Inject
 
 @HiltViewModel

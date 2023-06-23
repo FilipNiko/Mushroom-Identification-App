@@ -1,6 +1,5 @@
 package rs.ac.metropolitan.mushroomiden.presentation.identificationSceens
 
-import rs.ac.metropolitan.mushroomiden.domain.model.IdentificationResult
 import rs.ac.metropolitan.mushroomiden.domain.model.LocationResultInfo
 
 
